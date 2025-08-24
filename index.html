@@ -5,11 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Escape the Classroom — Phaser</title>
   <style>
-    :root{--bg:#0f172a;--ink:#e5e7eb;--panel:#111827;--accent:#38bdf8}
+    :root{--bg:#0f172a;--ink:#e5e7eb;--panel:#111827}
     html,body{height:100%}
-    body{margin:0;display:grid;place-items:center;
-         background:radial-gradient(900px 600px at 70% -10%,#1f2937 0%,var(--bg) 60%);
-         color:var(--ink);font-family:system-ui,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif}
+    body{margin:0;display:grid;place-items:center;background:#0b1020;color:var(--ink);
+         font-family:system-ui,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif}
     .wrap{width:960px;max-width:calc(100vw - 24px)}
     .top{display:flex;align-items:center;justify-content:space-between;margin:16px 0}
     .hud{display:flex;gap:10px}
@@ -33,7 +32,6 @@
       </div>
     </div>
 
-    <!-- Phaser v3 -->
     <script src="https://cdn.jsdelivr.net/npm/phaser@3/dist/phaser.min.js"></script>
     <canvas id="game" width="960" height="540"></canvas>
     <script type="module" src="./src/main.js"></script>
@@ -46,7 +44,7 @@
   </div>
 
   <script>
-    // HUD bindings
+    // HUD + prevent page scrolling on game keys
     const keysTag = document.getElementById('keysTag');
     const timeTag = document.getElementById('timeTag');
     document.getElementById('resetBtn').addEventListener('click', () => window.__RESET__ && window.__RESET__());
@@ -54,6 +52,9 @@
       setKeys: (got,total)=> keysTag.textContent = `Keys: ${got} / ${total}`,
       setTime: (t)=> timeTag.textContent = `Time: ${t.toFixed(1)}s`
     };
+    addEventListener('keydown', e => {
+      if (['Space','ArrowUp','ArrowLeft','ArrowRight'].includes(e.code)) e.preventDefault();
+    }, {passive:false});
   </script>
 </body>
 </html>
